@@ -18,7 +18,7 @@ class CreatePeminjamanTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->integer('anggota_id')->unsigned();
             $table->integer('buku_id')->unsigned();
-            $table->date('tgl_pinjam');
+            $table->string('tgl_pinjam');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('anggota_id')->references('id')->on('anggota');
             $table->foreign('buku_id')->references('id')->on('buku');

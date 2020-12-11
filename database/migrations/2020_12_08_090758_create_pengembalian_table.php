@@ -16,9 +16,8 @@ class CreatePengembalianTable extends Migration
         Schema::create('pengembalian', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('peminjaman_id')->unsigned();
-            $table->date('tgl_kembali');
+            $table->string('tgl_kembali');
             $table->string('status');
-            $table->integer('denda');
             $table->foreign('peminjaman_id')->references('id')->on('peminjaman');
             $table->timestamps();
         });

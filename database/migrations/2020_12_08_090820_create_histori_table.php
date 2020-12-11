@@ -15,8 +15,8 @@ class CreateHistoriTable extends Migration
     {
         Schema::create('histori', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('peminjaman_id')->unsigned();
-            $table->integer('pengembalian_id')->unsigned();
+            $table->integer('peminjaman_id')->unsigned()->nullable();
+            $table->integer('pengembalian_id')->unsigned()->nullable();
             $table->foreign('peminjaman_id')->references('id')->on('peminjaman');
             $table->foreign('pengembalian_id')->references('id')->on('pengembalian');
             $table->timestamps();

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource( '/users' , 'UsersController' );
-Route::get('/users/hapus/{kode}','UsersController@destroy');
-Route::resource( '/anggota' , 'AnggotaController' );
+Route::middleware('auth')->group(function () {
+
+    Route::get('beranda', 'HomeController@index')->name('home');
+    Route::resource('admin', 'AdminController');
+    Route::resource('anggota', 'AnggotaController');
+    Route::resource('buku', 'BukuController');
+    Route::resource('peminjaman', 'PeminjamanController');
+    Route::resource('pengembalian', 'PengembalianController');
+    Route::resource('histori', 'HistoriController');
+});

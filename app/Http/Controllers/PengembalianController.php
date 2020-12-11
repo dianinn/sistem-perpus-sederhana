@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Models\Peminjaman;
+use App\Models\Pengembalian;
+use App\Models\Anggota;
 use App\Models\Buku;
+use App\Models\Histori;
+use App\User;
 
-use Illuminate\Validation\Rule;
-
-class BukuController extends Controller
+class PengembalianController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +20,7 @@ class BukuController extends Controller
      */
     public function index()
     {
-        $listBuku = Buku::all();
-
-        return view('admin.buku.index', compact('listBuku'));
+        //
     }
 
     /**
@@ -28,7 +30,7 @@ class BukuController extends Controller
      */
     public function create()
     {
-        return view('admin.buku.create');
+        //
     }
 
     /**
@@ -39,20 +41,22 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'isbn' => 'required|unique:buku',
-            'judul' => 'required',
-            'pengarang' => 'required',
-            'penerbit' => 'required',
-            'tahun' => 'required|numeric',
-            'stok' => 'required',
-        ]);
+        $dataPeminjam = Peminjaman::with('anggota')->with('buku')->findOrFail($request->peminjaman_id);
+        $idBuku = $dataPeminjam->buku_id;
 
-        $dataBuku = $request->all();
+        // Mengembalikan stok buku ke semula
+        Buku::findOrFail($idBuku)->update(['stok' => $dataPeminjam->buku->stok + 1]);
 
-        Buku::create($dataBuku);
+        // Memasukan data pengembalian ke table
+        $pengembalian = Pengembalian::create($request->all());
 
-        return redirect()->route('buku.index')->with('status', 'Buku baru berhasil ditambahkan!');
+        // Memasukan id pengembalian ke table histori
+        Histori::where('peminjaman_id', $dataPeminjam->id)->first()->update(['pengembalian_id' => $pengembalian->id]);
+
+        // Menghapus data peminjaman
+        Peminjaman::findOrFail($dataPeminjam->id)->update(['dikembalikan' => 1]);
+
+        return redirect()->route('peminjaman.index')->with('status', 'Buku berhasil dikembalikan!');
     }
 
     /**
@@ -74,9 +78,12 @@ class BukuController extends Controller
      */
     public function edit($id)
     {
-        $buku = Buku::findOrFail($id);
 
-        return view('admin.buku.edit', compact('buku'));
+        $peminjam = Peminjaman::with('admin')->with('anggota')->with('buku')->findOrFail($id);
+
+        return view('admin.pengembalian.edit', [
+            'peminjam' => $peminjam
+        ]);
     }
 
     /**
@@ -88,20 +95,7 @@ class BukuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate(request(), [
-            'isbn' => Rule::unique('buku')->ignore($id),
-            'judul' => 'required',
-            'pengarang' => 'required',
-            'penerbit' => 'required',
-            'tahun' => 'required|numeric',
-            'stok' => 'required',
-        ]);
-
-        $dataBuku = $request->all();
-
-        Buku::findOrFail($id)->update($dataBuku);
-
-        return redirect()->route('buku.index')->with('status', 'Buku berhasil diperbaharui!');
+        //
     }
 
     /**
@@ -112,8 +106,6 @@ class BukuController extends Controller
      */
     public function destroy($id)
     {
-        Buku::findOrFail($id)->delete();
-
-        return redirect()->route('buku.index')->with('status', 'Buku berhasil dihapus!');
+        //
     }
 }

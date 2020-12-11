@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Histori;
+use App\Models\Peminjaman;
 
-use App\Models\Anggota;
-
-class AnggotaController extends Controller
+class HistoriController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        $listAnggota = Anggota::all();
+        $dataHistori = Histori::with('peminjaman.anggota')->with('pengembalian')->get();
 
-        return view('admin.anggota.index', compact('listAnggota'));
+        return view('admin.histori.index', compact('dataHistori'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AnggotaController extends Controller
      */
     public function create()
     {
-        return view('admin.anggota.create');
+        //
     }
 
     /**
@@ -38,11 +38,7 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        $dataAnggota = $request->all();
-
-        Anggota::create($dataAnggota);
-
-        return redirect()->route('anggota.index')->with('status', 'Anggota baru berhasil ditambahkan!');
+        //
     }
 
     /**
@@ -53,7 +49,9 @@ class AnggotaController extends Controller
      */
     public function show($id)
     {
-        //
+        $peminjaman = Peminjaman::with('buku')->findOrFail($id);
+
+        return view('admin.histori.show', compact('peminjaman'));
     }
 
     /**
@@ -64,9 +62,7 @@ class AnggotaController extends Controller
      */
     public function edit($id)
     {
-        $anggota  = Anggota::findOrFail($id);
-
-        return view('admin.anggota.edit', compact('anggota'));
+        //
     }
 
     /**
@@ -78,9 +74,7 @@ class AnggotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Anggota::findOrFail($id)->update($request->all());
-
-        return redirect()->route('anggota.index')->with('status', 'Data Anggota berhasil diperbaharui');
+        //
     }
 
     /**
@@ -91,8 +85,6 @@ class AnggotaController extends Controller
      */
     public function destroy($id)
     {
-        Anggota::findOrFail($id)->delete();
-
-        return redirect()->route('anggota.index')->with('status', 'Data Anggota berhasil dihapus');
+        //
     }
 }
