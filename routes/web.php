@@ -30,4 +30,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('peminjaman', 'PeminjamanController');
     Route::resource('pengembalian', 'PengembalianController');
     Route::resource('histori', 'HistoriController');
+    Route::resource('laporan' , 'LaporanController' );
 });

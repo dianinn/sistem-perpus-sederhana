@@ -10,7 +10,7 @@ use App\User;
 class AdminController extends Controller
 {
 
-    protected $admin = 'faktaarief16@gmail.com';
+    protected $admin = 'dianindria20@gmail.com';
 
     /**
      * Display a listing of the resource.
@@ -51,7 +51,12 @@ class AdminController extends Controller
             'password' => 'required'
         ]);
 
-        User::create($request->all());
+        $dataAdmin = $request->all();
+        $dataAdmin['password'] = bcrypt($request->password);
+
+        dd($dataAdmin);
+
+        User::create($dataAdmin);
 
         return redirect()->route('admin.index')->with('status', 'Admin baru berhasil ditambahkan!');
     }
@@ -78,10 +83,11 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
 
         if ($request->user()->email !== $this->admin) {
+            if ($request->user()->id === $user->id) {
+                return view('admin.admins.edit', compact('user'));
+            }  
             return 'No acceess';
-        }
-
-        return view('admin.admins.edit', compact('user'));
+        } 
     }
 
     /**
@@ -93,25 +99,25 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        if ($request->user()->email !== $this->admin) {
-            return 'No acceess';
-        }
-
         $this->validate(request(), [
             'name' => 'required',
             'email' => Rule::unique('users')->ignore($id),
         ]);
 
-        $dataUser = $request->only(['name', 'email']);
+        if ($request->user()->email !== $this->admin) {
+            if ($request->user()->id === User::findOrFail($id)->id) {
+                $dataUser = $request->only(['name', 'email']);
 
-        if ($request->password) {
-            $dataUser['password'] = $request->password;
+                if ($request->password) {
+                    $dataUser['password'] = $request->password;
+                }
+        
+                User::findOrFail($id)->update($dataUser);
+        
+                return redirect()->route('admin.index')->with('status', 'Data Admin berhasil diperbaharui!');
+            }
+            return 'No acceess';
         }
-
-        User::findOrFail($id)->update($dataUser);
-
-        return redirect()->route('admin.index')->with('status', 'Data Admin berhasil diperbaharui!');
     }
 
     /**
