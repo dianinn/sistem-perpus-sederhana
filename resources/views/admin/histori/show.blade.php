@@ -26,6 +26,11 @@
 </div>
 <div class="row justify-content-center mt-3">
     <div class="col-sm-8">
+        <a href="{{ route('laporan.cetak', $peminjaman->id) }}" class="btn btn-primary">Cetak PDF</a>
+    </div>
+</div>
+<div class="row justify-content-center mt-3">
+    <div class="col-sm-8">
         <table class="table table-striped">
             <tr>
                 <th>ISBN</th>

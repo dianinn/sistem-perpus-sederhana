@@ -65,10 +65,12 @@
                                     <a href="{{ route('admin.edit', $user->id) }}" class="mr-2 text-decoration-none">
                                         <i class=" fas fa-pen-square fa-lg edit-icon"></i>
                                     </a>
-                                    |
-                                    <button class="delete-btn" onclick="return confirm('Yakin akan menghapus?')">
-                                        <i class="fas fa-trash-alt fa-lg delete-icon"></i>
-                                    </button>
+                                    <span class="{{ Auth::user()->email === $admin ? '' : 'd-none' }}">
+                                        |
+                                        <button class="delete-btn" onclick="return confirm('Yakin akan menghapus?')">
+                                            <i class="fas fa-trash-alt fa-lg delete-icon"></i>
+                                        </button>
+                                    </span>
 
                                 </form>
                             </td>

@@ -44,7 +44,7 @@
                                 <div class="col-lg-20">
                                     <div class="p-5">
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb4">Perpustakaan Anjayyyy<br><br><img src="{{ asset('asset/img/logo_perpusceitanya.png')}}"width="160"></h1>
+                                            <h1 class="h4 text-gray-900 mb4">Perpustakaan Kawaii's<br><br><img src="{{ asset('asset/img/logoperpus.png')}}"width="125"></h1>
                                         </div>
                                         <form method="POST" action="{{ route('login') }}">
                                             @csrf

@@ -32,6 +32,11 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-sm-12 pb-5 pl-5">
+        <a href="{{ route('laporan.cetak.histori') }}" class="btn btn-primary">Cetak Histori</a>
+    </div>
+</div>
+<div class="row">
     <div class="col-sm-12 p-5">
         <table id="histori" class="table table-stripped pb-3" style="width: 100%">
             <thead>

@@ -30,4 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('peminjaman', 'PeminjamanController');
     Route::resource('pengembalian', 'PengembalianController');
     Route::resource('histori', 'HistoriController');
+    
+    Route::get('laporan' , 'LaporanController@index')->name('laporan.index');
+    Route::get('laporan/cetak/{id}' , 'LaporanController@cetak')->name('laporan.cetak');
+    Route::get('laporan/cetak_histori' , 'LaporanController@cetak_histori')->name('laporan.cetak.histori');
 });

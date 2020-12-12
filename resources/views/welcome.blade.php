@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Perpustakaan Anjayyyyy</title>
+        <title>Perpustakaan Kawaii's</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -89,7 +89,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <h1 class="judul">PERPUSTAKAAN ANJAYYYYY</h1>
+                    <h1 class="judul">PERPUSTAKAAN KAWAII'S</h1>
                 </div>
             </div>
         </div>
