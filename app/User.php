@@ -37,11 +37,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
-
     public function peminjaman()
     {
         return $this->hasMany(App\Peminjaman::class, 'user_id');

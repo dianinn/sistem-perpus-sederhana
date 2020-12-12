@@ -51,7 +51,10 @@ class AdminController extends Controller
             'password' => 'required'
         ]);
 
-        User::create($request->all());
+        $dataAdmin = $request->all();
+        $dataAdmin['password'] = bcrypt($request->password);
+
+        User::create($dataAdmin);
 
         return redirect()->route('admin.index')->with('status', 'Admin baru berhasil ditambahkan!');
     }
@@ -106,7 +109,7 @@ class AdminController extends Controller
         $dataUser = $request->only(['name', 'email']);
 
         if ($request->password) {
-            $dataUser['password'] = $request->password;
+            $dataUser['password'] = bcrypt($request->password);
         }
 
         User::findOrFail($id)->update($dataUser);
