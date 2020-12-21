@@ -4,9 +4,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
       <div class="sidebar-brand-icon rotate-n-0">
-        <img src="/asset/img/logo_ubsi.png" width="60">
+        <img src="{{ asset('asset/img/logoperpus.png')}}"width="60">
       </div>
-      <div class="sidebar-brand-text mx-2">PerpusKu</div>
+      <div class="sidebar-brand-text mx-2">Perpustakaan Kawaii's</div>
     </a>
 
     <!-- Divider -->

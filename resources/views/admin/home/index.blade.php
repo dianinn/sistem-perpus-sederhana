@@ -7,7 +7,7 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
               <h1 class="display-4">Halo, {{ Auth::user()->name }}!</h1>
-              <p class="lead">Saat ini Anda sedang berada di halaman Admin PerpusKu.</p>
+              <p class="lead">Saat ini Anda sedang berada di halaman Admin Perpustakaan Kawaii's.</p>
             </div>
         </div>
     </div>

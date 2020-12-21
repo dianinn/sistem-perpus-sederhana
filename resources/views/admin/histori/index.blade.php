@@ -55,8 +55,8 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $histori->peminjaman->anggota->nama }}</td>
                         <td>{{ $histori->peminjaman->tgl_pinjam }}</td>
-                        <td>{{ $histori->pengembalian->tgl_kembali }}</td>
-                        <td>{{ $histori->pengembalian->status }}</td>
+                        <td>{{ $histori->pengembalian ? $histori->pengembalian->tgl_kembali : '-' }}</td>
+                        <td>{{ $histori->pengembalian ? $histori->pengembalian->status : '-' }}</td>
                         <td><a href="{{ route('histori.show', $histori->peminjaman->id) }}"><small>Lihat Buku</small></a></td>
                     </tr>
                 @endforeach

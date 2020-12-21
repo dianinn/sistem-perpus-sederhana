@@ -20,12 +20,12 @@
             <tr>
                 <th>Tanggal Pengembalian</th>
                 <th>:</th>
-                <td>{{ $dataPengembalian->tgl_kembali }}</td>
+                <td>{{ $dataPengembalian ? $dataPengembalian->tgl_kembali : '-' }}</td>
             </tr>
             <tr>
                 <th>Status Pengembalian</th>
                 <th>:</th>
-                <td>{{ $dataPengembalian->status }}</td>
+                <td>{{ $dataPengembalian ? $dataPengembalian->status : '-' }}</td>
             </tr>
             <tr>
                 <th colspan="3" class="text-center">Data Buku</th>
