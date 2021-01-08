@@ -31,7 +31,7 @@
         <h4>Kelola Anggota</h4>
     </div>
     <div class="col-sm-2 pt-5">
-        <a href="{{ route('anggota.create') }}" class="bg-primary p-2 rounded text-white text-decoration-none">+ Tambah Anggota</a>
+        <a href="{{ route('anggota.create') }}" id="add-member" class="bg-primary p-2 rounded text-white text-decoration-none">+ Tambah Anggota</a>
     </div>
 </div>
 <div class="row">

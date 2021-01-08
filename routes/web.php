@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('peminjaman', 'PeminjamanController');
     Route::resource('pengembalian', 'PengembalianController');
     Route::resource('histori', 'HistoriController');
+    Route::post('histori/range', 'HistoriController@range')->name('histori.range');
     
     Route::get('laporan' , 'LaporanController@index')->name('laporan.index');
     Route::get('laporan/cetak/{id}' , 'LaporanController@cetak')->name('laporan.cetak');

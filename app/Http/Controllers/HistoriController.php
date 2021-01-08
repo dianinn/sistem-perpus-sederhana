@@ -15,9 +15,26 @@ class HistoriController extends Controller
      */
     public function index()
     {
+        // $from = date('2020-01-01');
+        // $to = date('2020-12-30');
+
         $dataHistori = Histori::with('peminjaman.anggota')->with('pengembalian')->get();
+        // $dataHistoriFoo = Histori::whereBetween('created_at', [$from, $to])->get();
+
+        // dd($dataHistori);
 
         return view('admin.histori.index', compact('dataHistori'));
+    }
+
+    public function range(Request $request)
+    {
+        $from = date($request->from);
+        $to = date($request->to);
+
+        $dataHistori = Histori::with('peminjaman.anggota')->with('pengembalian')->whereBetween('created_at', [$from, $to])->get();
+
+        return view('admin.histori.index', compact('dataHistori'));
+
     }
 
     /**

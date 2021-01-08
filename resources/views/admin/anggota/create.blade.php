@@ -19,19 +19,19 @@
             @csrf
             <div class="form-group">
                 <label for="nama">Nama</label>
-                <input type="text" class="form-control" name="nama" required>
+                <input type="text" id="name" class="form-control" name="nama" required>
             </div>
             <div class="form-group">
                 <label for="alamat">Alamat</label>
-                <textarea name="alamat" class="form-control" rows="4"></textarea>
+                <textarea name="alamat" id="address" class="form-control" rows="4"></textarea>
             </div>
             <div class="form-group">
                 <label for="telp">Telepon</label>
-                <input type="number" name="telp" class="form-control" required>
+                <input type="number" id="phone" name="telp" class="form-control" required>
             </div>
             <div class="form-group">
                 <a href="{{ route('anggota.index') }}" class="btn btn-secondary">Kembali</a>
-                <button class="btn btn-primary">Simpan</button>
+                <button class="btn btn-primary" id="save">Simpan</button>
             </div>
         </form>
     </div>
